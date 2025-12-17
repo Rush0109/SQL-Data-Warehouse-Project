@@ -7,7 +7,8 @@ This project demonstrates a comprehensive data warehousing and analytics solutio
 
 ## Project Requirements
 ### Building the Data Warehouse (Data Engineering)
-BRNE Objective
+
+### Objective
 Develop a modern data warehouse using SQL Server to consolidate sales data, enabling analytical reporting and informed decision-making.
 BRNS Specifications
 **Data Sources: Isport data from tap source systems (ERP and CRM) provided as CSV files.
