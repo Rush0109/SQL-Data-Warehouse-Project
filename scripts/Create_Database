@@ -1,0 +1,17 @@
+-- Create Database 'DataWarehouse'
+
+-- Created the Database
+CREATE DATABASE DataWareHouse;
+GO
+
+-- Shifted to the created Database
+USE DataWareHouse;
+GO
+
+-- Created the Schema
+CREATE SCHEMA Bronze;
+GO
+CREATE SCHEMA Silver;
+GO
+CREATE SCHEMA Gold;
+Go
