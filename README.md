@@ -51,6 +51,12 @@ The warehouse is designed using a **three-layer Medallion Architecture**:
 
 ---
 
+## 🔄 CRM–ERP Data Integration
+
+<img width="1920" height="992" alt="Data_Integration_(Warehouse_project)" src="https://github.com/user-attachments/assets/385c115b-0bb0-4a88-b43f-8fda593a4c09" />
+
+---
+
 ## ⚙️ Key Transformations & Logic
 
 ### 🧹 Data Cleansing
