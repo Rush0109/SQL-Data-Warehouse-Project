@@ -81,47 +81,8 @@ Analytics / Reporting / BI
 ## 🗃️ Data Model (Gold Layer)
 
 ### ⭐ Star Schema
+<img width="1920" height="993" alt="Data_mart_(Warehouse_project)" src="https://github.com/user-attachments/assets/3a29de49-f340-441a-9bb2-1fb2a2f69b8a" />
 
-#### Fact Table
-
-**fact_sales**
-
-* order_number
-* product_key
-* customer_key
-* order_date
-* shipping_date
-* due_date
-* sales_amount
-* quantity
-* price
-
-#### Dimension Tables
-
-**dim_customers**
-
-* customer_key (surrogate key)
-* customer_id
-* customer_number
-* first_name
-* last_name
-* gender
-* marital_status
-* country
-* birthdate
-* create_date
-
-**dim_products**
-
-* product_key (surrogate key)
-* product_id
-* product_number
-* product_name
-* category
-* subcategory
-* product_line
-* cost
-* start_date
 
 ---
 
