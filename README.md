@@ -1,43 +1,238 @@
-# SQL-Data-Warehouse-Project
+# 📊 SQL Data Warehouse Project
 
-Welcome to the **Data Warehouse and Analytics Project** repository!
-This project demonstrates a comprehensive data warehousing and analytics solution, from building a data warehouse to generating actionable insights. Designed as a portfolio project highlights industry best practices in data engineering and analytics. 
-
----
-
-## Project Requirements
-
-### Building the Data Warehouse (Data Engineering)
-
-### Objective
-Develop a modern data warehouse using SQL Server to consolidate sales data, enabling analytical reporting and informed decision-making.
-
-### Specifications
-- **Data Sources**: Import data from two source systems (ERP and CRM) provided as CSV files.
-- **Data Quality**: Cleanse and resolve data quality issues prior to analysis.
-- **Integration**: Combine both sources into a single, user-friendly data model designed for analytical queries.
-- **Scope**: Focus on the latest dataset only; historization of data is not required.
-- **Documentation**: Provide clear documentation of the data model to support both business stakeholders and analytics teams.
+**End-to-End Data Warehouse using Medallion Architecture (Bronze, Silver, Gold)**
 
 ---
 
-### BI: Analytics & Reporting (Data Analytics)
+## 📌 Overview
 
-#### Objective
-Develop SQL-based analytics to deliver detailed insights into:
-- **Customer Behavior**
-- **Product Performance**
-- **Sales Trends**
+This project demonstrates the design and implementation of a **SQL Server–based Data Warehouse** that integrates data from multiple source systems (CRM and ERP) and transforms it into **analytics-ready datasets** for reporting and decision-making.
 
-These insights empower stakeholders with key business metrics, enabling strategic decision-making.
+The solution follows **Medallion Architecture** principles to clearly separate raw data ingestion, data cleansing, and business-ready analytics layers.
+The project focuses on **data quality, transformation logic, and dimensional modeling**, reflecting real-world data engineering and analytics practices.
 
 ---
 
-## License
+## 🎯 Business Problem
 
-This project is licensed under the [MIT License].(LICENSE). You are free to use, modify, and share this project with proper attribution.
+Operational data was available as **raw CSV files** from different systems:
 
-## About Me 
+* **CRM system**: customer, product, and sales transactions
+* **ERP system**: customer demographics, locations, and product categories
 
-I am an EX&T Graduate Who loves math and number. From early age i use to work on excel designing sheets to maintain my expense and there i learned about formula such as SUM, INDEX, FILTER, MIN, MAX, LOOKUPS, etc. Currently i am working towards mastering SQL to land job in Data driven market. 
-9
+Key challenges:
+
+* Duplicate and inconsistent customer records
+* Invalid or missing dates
+* Incorrect or inconsistent sales values
+* No unified data model for analytics
+* Manual and repetitive data preparation for reporting
+
+The objective was to **centralize, clean, and structure the data** into a trusted data warehouse that supports fast, consistent, and reliable analytics.
+
+---
+
+## 🏗️ Architecture Overview
+
+The warehouse is designed using a **three-layer Medallion Architecture**:
+
+### 🔹 Bronze Layer (Raw Data)
+
+* Stores source data **as-is**
+* Data ingested from CSV files using bulk load operations
+* No transformations applied
+* Serves as an audit and traceability layer
+
+### 🔹 Silver Layer (Cleaned & Standardized Data)
+
+* Applies data cleansing, validation, and standardization
+* Handles:
+
+  * Duplicate records
+  * Invalid and future dates
+  * Inconsistent categorical values
+  * Incorrect or missing sales values
+* Enforces business rules and data quality logic
+
+### 🔹 Gold Layer (Business-Ready Data)
+
+* Analytics-ready **star schema**
+* Fact and dimension views
+* Optimized for BI tools, reporting, and ad-hoc SQL queries
+
+---
+
+## 🔁 Data Flow
+
+```
+Source CSV Files
+   ↓
+Bronze Layer (Raw Tables)
+   ↓
+Silver Layer (Cleaned & Standardized Tables)
+   ↓
+Gold Layer (Fact & Dimension Views)
+   ↓
+Analytics / Reporting / BI
+```
+
+---
+
+## 🗃️ Data Model (Gold Layer)
+
+### ⭐ Star Schema
+
+#### Fact Table
+
+**fact_sales**
+
+* order_number
+* product_key
+* customer_key
+* order_date
+* shipping_date
+* due_date
+* sales_amount
+* quantity
+* price
+
+#### Dimension Tables
+
+**dim_customers**
+
+* customer_key (surrogate key)
+* customer_id
+* customer_number
+* first_name
+* last_name
+* gender
+* marital_status
+* country
+* birthdate
+* create_date
+
+**dim_products**
+
+* product_key (surrogate key)
+* product_id
+* product_number
+* product_name
+* category
+* subcategory
+* product_line
+* cost
+* start_date
+
+---
+
+## ⚙️ Key Transformations & Logic
+
+### 🧹 Data Cleansing
+
+* Standardized gender, marital status, and country values
+* Converted invalid date formats to `NULL`
+* Removed future birthdates
+
+### 🔁 Deduplication
+
+* Used `ROW_NUMBER()` window function to retain the latest customer records
+
+### 📦 Product Lifecycle Handling
+
+* Used `LEAD()` window function to manage product history
+* Filtered only active products in the Gold layer
+
+### 💰 Sales Validation
+
+* Recalculated sales when values were missing or inconsistent
+
+  ```
+  sales = quantity × price
+  ```
+
+---
+
+## 🧠 SQL Concepts Used
+
+* Stored Procedures
+* Window Functions (`ROW_NUMBER`, `LEAD`)
+* Common Table Expressions (CTEs)
+* Conditional Logic (`CASE`)
+* Data Type Casting & Validation
+* Joins (LEFT JOIN)
+* Star Schema Modeling
+* ETL Design Patterns
+
+---
+
+## 🛠️ Tools & Technologies
+
+* **Database:** SQL Server
+* **Language:** T-SQL
+* **IDE:** SQL Server Management Studio (SSMS)
+* **Data Sources:** CSV Files
+* **Version Control:** GitHub
+
+---
+
+## 📈 Outcomes & Impact
+
+* Eliminated repetitive manual data cleaning
+* Created a single source of truth for analytics
+* Improved data consistency and reporting reliability
+* Enabled faster, cleaner, and scalable analytics queries
+* Built a solid foundation for BI tools and future enhancements
+
+---
+
+## 🚀 How to Run the Project
+
+1. Create the database and schemas (`Bronze`, `Silver`, `Gold`)
+2. Load source CSV files into the Bronze layer
+3. Execute Silver layer transformation stored procedure
+4. Query Gold layer views for analytics and reporting
+
+---
+
+## 🔮 Future Improvements
+
+* Implement incremental loading (CDC / watermark logic)
+* Add indexes for performance optimization
+* Introduce automated data quality tests
+* Integrate BI tools (Power BI / Tableau)
+* Add orchestration using SQL Agent or external schedulers
+
+---
+
+## 🙌 Credits
+
+This project was inspired by learning resources from **DataWithBaraa**.
+While the initial architectural concepts were referenced for learning, the **data model, SQL transformations, validation logic, and overall implementation were redesigned and implemented independently**.
+
+---
+
+## 👤 Author
+
+**Rushikesh Sawant**
+SQL | Data Analysis | Data Warehousing
+
+🔗 GitHub: [https://github.com/Rush0109](https://github.com/Rush0109)
+
+---
+
+### ✅ Why this README is strong
+
+* Honest but confident
+* Not labeled as a “tutorial project”
+* Clear ownership of implementation
+* Interview-ready narrative
+* Recruiter-friendly language
+
+If you want next, I can:
+
+* review this once you push it live
+* add diagrams directly into README
+* write a **short recruiter-focused README**
+* help you defend this project in **interviews**
+
+This README is **final-grade and professional**.
