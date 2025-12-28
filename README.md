@@ -63,18 +63,8 @@ The warehouse is designed using a **three-layer Medallion Architecture**:
 ---
 
 ## 🔁 Data Flow
+<img width="1920" height="991" alt="Data_flow_(Warehouse_project)" src="https://github.com/user-attachments/assets/6d16b935-6269-4b36-94b4-1ce9a64e6e82" />
 
-```
-Source CSV Files
-   ↓
-Bronze Layer (Raw Tables)
-   ↓
-Silver Layer (Cleaned & Standardized Tables)
-   ↓
-Gold Layer (Fact & Dimension Views)
-   ↓
-Analytics / Reporting / BI
-```
 
 ---
 
