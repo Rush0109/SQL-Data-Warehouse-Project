@@ -78,9 +78,8 @@ Analytics / Reporting / BI
 
 ---
 
-## 🗃️ Data Model (Gold Layer)
+## 🗃️ Data Mart (⭐ Star Schema)
 
-### ⭐ Star Schema
 <img width="1920" height="993" alt="Data_mart_(Warehouse_project)" src="https://github.com/user-attachments/assets/3a29de49-f340-441a-9bb2-1fb2a2f69b8a" />
 
 
